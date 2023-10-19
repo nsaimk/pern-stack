@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
+import { useNavigate } from "react-router-dom"; 
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -7,16 +8,23 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [cohort, setCohort] = useState("");
 
+  const navigate = useNavigate(); 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const body = { username, password, email, cohort };
-      const response = await fetch("http://localhost:5001/users", { // fetch the data from the server
+      const response = await fetch("http://localhost:5001/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      window.location = "/"; // refresh the page
+
+      if (response.ok) {
+        navigate("/profile");
+      } else {
+        console.log("Signup failed");
+      }
     } catch (error) {
       console.log(error);
     }

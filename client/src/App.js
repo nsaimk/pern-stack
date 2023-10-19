@@ -1,12 +1,18 @@
-import { Fragment } from 'react';
-import './App.css';
-import Signup from './components/Signup';
+import { React, Fragment } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Signup from "./components/Signup";
+import Profile from "./components/Profile"; // Import your profile component
 
 function App() {
   return (
-    <Fragment>
-      <Signup />
-    </Fragment>
+    <BrowserRouter>
+      <Fragment>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </Fragment>
+    </BrowserRouter>
   );
 }
 
